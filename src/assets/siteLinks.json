@@ -1,0 +1,22 @@
+[
+  {
+    "icon": "Blog",
+    "name": "博客",
+    "link": "https://blog.xrlfreedom.top/"
+  },
+  {
+    "icon": "Film",
+    "name": "Emby",
+    "link": "https://emby.xrlfreedom.top/"
+  },
+  {
+    "icon": "Signal",
+    "name": "状态",
+    "link": "https://stats.uptimerobot.com/zWPHLIPAjo"
+  },
+  {
+    "icon": "Heart",
+    "name": "Love Wall",
+    "link": "/love"
+  }
+]
