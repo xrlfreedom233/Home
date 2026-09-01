@@ -49,8 +49,6 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Mousewheel } from "swiper/modules";
 import siteLinks from "@/assets/siteLinks.json";
 
-const store = mainStore();
-
 // 计算网站链接
 const siteLinksList = computed(() => {
   const result = [];
@@ -77,11 +75,7 @@ const siteIcon = {
 
 // 链接跳转
 const jumpLink = (data) => {
-  if (data.name === "音乐" && store.musicClick) {
-    if (typeof $openList === "function") $openList();
-  } else {
-    window.open(data.link, "_blank");
-  }
+  window.open(data.link, "_blank");
 };
 
 onMounted(() => {

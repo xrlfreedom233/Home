@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import { getAdcode, getWeather, getOtherWeather } from "@/api";
+import { getAdcode, getWeather } from "@/api";
 import { Error } from "@icon-park/vue-next";
 
 // 高德开发者 Key
@@ -40,59 +40,29 @@ const weatherData = reactive({
   },
 });
 
-// 取出天气平均值
-const getTemperature = (min, max) => {
-  try {
-    // 计算平均值并四舍五入
-    const average = (Number(min) + Number(max)) / 2;
-    return Math.round(average);
-  } catch (error) {
-    console.error("计算温度出现错误：", error);
-    return "NaN";
-  }
-};
-
 // 获取天气数据
 const getWeatherData = async () => {
   try {
-    // 获取地理位置信息
-    if (!mainKey) {
-      console.log("未配置，使用备用天气接口");
-      const result = await getOtherWeather();
-      console.log(result);
-      const data = result.result;
-      weatherData.adCode = {
-        city: data.city.City || "未知地区",
-        // adcode: data.city.cityId,
-      };
-      weatherData.weather = {
-        weather: data.condition.day_weather,
-        temperature: getTemperature(data.condition.min_degree, data.condition.max_degree),
-        winddirection: data.condition.day_wind_direction,
-        windpower: data.condition.day_wind_power,
-      };
-    } else {
-      // 获取 Adcode（按出口 IP 定位）
-      const adCode = await getAdcode(mainKey);
-      console.log(adCode);
-      if (adCode.infocode !== "10000") {
-        throw "地区查询失败";
-      }
-      // IP 定位结果为空（高德认不出该 IP）时，回退到 .env 配置的默认城市
-      const cityAdcode = adCode.adcode?.length ? adCode.adcode : defaultCity || "";
-      // 获取天气信息
-      const result = await getWeather(mainKey, cityAdcode);
-      weatherData.adCode = {
-        city: adCode.city?.length ? adCode.city : result.lives?.[0]?.city || "",
-        adcode: cityAdcode,
-      };
-      weatherData.weather = {
-        weather: result.lives[0].weather,
-        temperature: result.lives[0].temperature,
-        winddirection: result.lives[0].winddirection,
-        windpower: result.lives[0].windpower,
-      };
+    // 获取 Adcode（按出口 IP 定位）
+    const adCode = await getAdcode(mainKey);
+    console.log(adCode);
+    if (adCode.infocode !== "10000") {
+      throw "地区查询失败";
     }
+    // IP 定位结果为空（高德认不出该 IP）时，回退到 .env 配置的默认城市
+    const cityAdcode = adCode.adcode?.length ? adCode.adcode : defaultCity || "";
+    // 获取天气信息
+    const result = await getWeather(mainKey, cityAdcode);
+    weatherData.adCode = {
+      city: adCode.city?.length ? adCode.city : result.lives?.[0]?.city || "",
+      adcode: cityAdcode,
+    };
+    weatherData.weather = {
+      weather: result.lives[0].weather,
+      temperature: result.lives[0].temperature,
+      winddirection: result.lives[0].winddirection,
+      windpower: result.lives[0].windpower,
+    };
   } catch (error) {
     console.error("天气信息获取失败:" + error);
     onError("天气信息获取失败");
