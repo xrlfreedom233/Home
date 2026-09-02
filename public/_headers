@@ -5,9 +5,9 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# 图片(含 background*.webp 等背景图)—— 缓存 7 天,过期可继续用旧版兜底
+# 图片(含 background*.webp 等背景图)—— 让 CF 边缘真正缓存,不再每次回源
 /images/*
-  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+  Cache-Control: public, max-age=604800
 
 # 字体
 /font/*
@@ -25,8 +25,4 @@
   Cache-Control: public, max-age=3600
 
 /manifest.webmanifest
-  Cache-Control: public, max-age=3600
-
-# 其他静态文件兜底
-/*
   Cache-Control: public, max-age=3600
