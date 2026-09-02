@@ -36,10 +36,13 @@ const emit = defineEmits(["loadComplete"]);
 // 请依据文件夹内的图片个数修改 Math.random() 后面的第一个数字，当前有 10 张
 const bgRandom = Math.floor(Math.random() * 10 + 1);
 
+// 背景图统一走 R2(自定义域 img.xrlfreedom.top);如更换域名只需改这一处
+const WALLPAPER_BASE = "https://img.xrlfreedom.top";
+
 // 更换壁纸链接
 const changeBg = (type) => {
   if (type == 0) {
-    bgUrl.value = `/images/background${bgRandom}.webp`;
+    bgUrl.value = `${WALLPAPER_BASE}/images/background${bgRandom}.webp`;
   } else if (type == 1) {
     bgUrl.value = "https://api.dujin.org/bing/1920.php";
   } else if (type == 2) {
@@ -76,7 +79,7 @@ const imgLoadError = () => {
       fill: "#efefef",
     }),
   });
-  bgUrl.value = `/images/background${bgRandom}.webp`;
+  bgUrl.value = `${WALLPAPER_BASE}/images/background${bgRandom}.webp`;
 };
 
 // 监听壁纸切换
