@@ -1,0 +1,5 @@
+# Cloudflare Pages 重定向规则
+# 访问 /love 跳转到独立子域名
+/love https://love.xrlfreedom.top/ 301
+/love/ https://love.xrlfreedom.top/ 301
+/love/* https://love.xrlfreedom.top/:splat 301
