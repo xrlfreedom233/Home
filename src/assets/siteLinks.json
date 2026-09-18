@@ -12,7 +12,12 @@
   {
     "icon": "Signal",
     "name": "状态",
-    "link": "https://stats.uptimerobot.com/zWPHLIPAjo"
+    "link": "https://status.xrlfreedom.top/"
+  },
+  {
+    "icon": "ChartBar",
+    "name": "Umami",
+    "link": "https://umami.xrlfreedom.top/"
   },
   {
     "icon": "Heart",
