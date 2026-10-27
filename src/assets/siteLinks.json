@@ -23,5 +23,10 @@
     "icon": "Heart",
     "name": "Love Wall",
     "link": "https://love.xrlfreedom.top/"
+  },
+  {
+    "icon": "Desktop",
+    "name": "监控",
+    "link": "https://monitor.xrlfreedom.top/"
   }
 ]
